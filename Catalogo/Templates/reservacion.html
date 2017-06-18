@@ -1,0 +1,145 @@
+{% extends "base2.html" %}
+{% block titlepage %}Reservación{% endblock %}
+{% load static %}
+{% block var %}
+	 <nav id="mainNav" style="background-color: #143458; height:80px;" class="navbar navbar-default navbar-custom navbar-fixed-top affix">
+        <div class="container row col-md-12">
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+            <img class="row col-md-2" src="{% static 'img/logo.png' %}" id="logou" alt="">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="{% url 'index' %}">Biblioteca virtual UNICAH</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="{% url 'index' %}#libros">Página principal</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="{% url 'logout' %}">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+{% endblock  %}
+
+{% block head %}
+{% endblock %}
+
+{% block container %}
+
+	{% block info %}
+		<div id="inf" class="row container" style="padding:10%;">
+			<div id="portada" class="col-md-4 col-md-offset-1">
+				<img id="portada" src="/media/{{ libro.portada }}" >
+			</div>
+			<div id="informacion" class="col-md-7">
+				{% if msj %}
+					<h2 id="titulo">{{ titulo }}</h2>
+					<p>{{ msj }}</p>
+					<form action="{% url 'index' %}">
+						<button type="submit" class="btn btn-primary">Página principal</button>
+					</form>
+				{% else %}
+				<p id="titulo">{{ libro }}</p> 
+				<p id="autor">{{ libro.autor }}</p>
+					<br>
+					<p><b>Editorial: </b>{{ libro.editorial }}</p>
+					<p><b>Idioma: </b>{{ libro.idioma }}</p>
+					<p><b>Edición: </b>{{ libro.edicion }}</p>
+					<p><b>Codigo de libro: </b>{{ libro.cod_libro }}</p>
+					<p><b>Copias disponibles: </b>{{ numero_copias }}</p>
+					<br>
+					<br>
+				{% endif %}
+				
+
+				{% if disponible %}
+				<input id="myBtn" type="submit" class="btn btn-primary col-md-6" value="Reservar">
+					<!-- The Modal -->
+					<div id="myModal" class="modal row">
+					  <!-- Modal content -->
+					  <div class="modal-content row col-md-10 col-md-offset-1">
+					  <span class="close">&times;</span>
+					  <form class="frmModal" id="frmReservacion" method="post" action="{% url 'confirmar_reservacion' libro.cod_libro %}">
+					 {% csrf_token %}
+					 	<h2>Confirmación</h2>
+					    <div class="input-group">
+				    <textarea placeholder="Escribe un comentario para justificar la reservación." name="comentario" class="form-control custom-control col-md-8" cols="150" rows="9" style="resize:none"></textarea>
+						<button id="btnConfirmar" type="submit" class="btn btn-primary">Confirmar</button>
+					</div>
+					</form>
+						  </div>
+						</div>
+					
+				{% endif %}
+				<div id="dialog" title="Basic dialog">
+  
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+      	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		
+
+	<style>
+	
+	
+	#portada{
+		height: 340px;
+		width: 260px;
+		margin-right: 3%;
+	}
+		#titulo{
+			font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;     
+			font-size: 1.66em;
+    		text-transform: uppercase;
+    		margin: 0px;
+    		color:#143458;
+		}
+
+		#autor{
+			font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;    
+			font-size: 16.5px;
+    		font-weight: 800;
+    		color:#fec503;
+    		text-transform: uppercase;
+		}
+
+		#btn{
+			height: 50px;
+			font-size: 16.5px;
+		}
+
+		@media screen and (max-width:360px){
+			.navbar-header{
+				display: inline-block;
+				position:absolute;
+			}
+
+			#inf{
+				margin-top: 25%;
+			}
+
+			.navbar-custom .nav li a {
+			    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			    text-transform: uppercase;
+			    font-weight: 400;
+			    letter-spacing: 1px;
+			    color: white;
+			    background-color: #525252;
+			}
+		}
+	</style>	
+	{% endblock %}
+{% endblock %}

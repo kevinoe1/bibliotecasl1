@@ -1,0 +1,97 @@
+{% extends "base2.html" %}
+{% block titlepage %}
+    Bienvenidos a Biblioteca
+{% endblock %}
+{% load static %}
+{% block var %}
+	 <nav id="mainNav" style="background-color: #143458; height:80px;" class="navbar navbar-default navbar-custom navbar-fixed-top affix">
+        <div class="container row col-md-12">
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+            <img class="row col-md-2" src="{% static 'img/logo.png' %}" id="logou" alt="">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="{% url 'index' %}">Biblioteca virtual UNICAH</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="{% url 'index' %}#libros">Libros</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">Acerca de</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="{% url 'logout' %}">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+{% endblock  %}
+{% block head %}
+	
+{% endblock %}
+
+{% block libro %}
+<section id="mostrar">
+		{% for libro in libros %}
+			<article class="libros">
+				<a id="cuadro" href="{% url 'reservacion' libro.cod_libro %}">
+				<img id="portada" src="../../media/{{ libro.portada }}" alt="por">
+				<b><p class="texto">{{ libro }}</p> 
+				<i><p class="texto">{{ libro.autor }}</p></i></b>
+				</a>
+			</article>
+		{% endfor %}
+</section>
+ <footer class="site-footer">
+    <div class="gr">
+        <div class="company-info">
+        <div class="footer" style="text-align: center;margin-left:0px"><h3 style="letter-spacing: 0.6px;">UNICAH Social</h3><br> <a href="https://instagram.com/unicah_hn/"><img src="{% static 'img/instagram.png' %}"></a> <a href="https://twitter.com/UNICAH_HN"><img src="{% static 'img/twitter.png' %}"></a> <a href="https://www.youtube.com/channel/UCuF6E9Gy5uygvlkBlo447Ow"><img src="{% static 'img/youtube.png' %}"></a> <a href="https://plus.google.com/u/0/"><img src="{% static 'img/google.png' %}"></a> <a href="https://www.facebook.com/UNICAHONDURAS"><img src="{% static 'img/facebook.png' %}"></a><br><br> <a style="color:#999;" target="_blank" href="http://www.unicah.edu/"><img src="{% static 'img/u.ico' %}" >www.unicah.edu</a></div>
+      <ul class="nav__items">
+      </ul>
+        <h3 class="site-footer__logo  site-footer__logo--beta"><a style="text-decoration:none; color:#FFFFFF;" href="/">Universidad Católica de Honduras</a></h3>
+        <p class="copyright">Derechos reservados © 2017</p>
+    </div>
+    </div>
+</footer>
+
+	<style>
+		#portada{
+			height: 190px;
+			width: 160px;
+		}
+		#cuadro{
+			color: black;
+			margin: auto;
+		}
+		#mostrar{
+			margin-top: -150px;
+			text-align: center;
+		}
+		.texto{
+			color: black;
+		}
+		.libros{
+			display: inline-table;
+			border: 3px;
+			border-style: outset;
+			height: 315px;
+			width: 220px;
+			text-align: center;
+			margin: 20px 20px 20px 20px;
+			padding: 15px;
+		}
+	</style>
+{% endblock  %}
+

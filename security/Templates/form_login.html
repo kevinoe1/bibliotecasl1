@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block titlepage %}
+    Iniciar sesion.
+{% endblock %}
+{% load static %}
+
+{% block css %}
+<style>
+	body {
+    background-image: url("{% static 'img/log.jpg' %}");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: auto;
+    text-align: center;
+	}
+	
+	a{
+    	font-family: "Microsoft YaHei Light", "Microsoft Tai Le";
+    }
+
+    p{
+    	font-family: "Microsoft YaHei Light", "Microsoft Tai Le";
+    	color:#FFFFFF;
+    }
+
+</style>
+	
+{% endblock %}
+
+{% block container %}
+        <div class="container row col-md-12">
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+            <img class="row col-md-1" src="{% static 'img/logo.png' %}" id="logou" alt="">
+            <div class="navbar-header page-scroll">
+                <a id="titulo" class="navbar-brand page-scroll" href="#page-top">Biblioteca virtual UNICAH</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+   
+<div class="container">
+	<div class="col-md-4 col-md-offset-4" style="height: 300px; background-color: rgba(0, 0, 0, 0.5); box-shadow: 0 0 8px rgba(0,0,0,0.5); margin-top: 5%;">
+		<form class="" style="margin-top: 10%;" action="/security/login/" method="post">
+			{% csrf_token %} 
+			<p>
+				<label for="id_username" style="color:#FFFFFF;">Usuario:</label> <input autofocus="" class="form-control" id="id_username" maxlength="254" name="username" type="text" required />
+			</p>
+			<p>
+				<label for="id_password" style="color:#FFFFFF;">Contraseña:</label> <input class="form-control" id="id_password" name="password" type="password" required />
+			</p>
+			<button class="btn btn-primary" type="submit">Iniciar Sesion</button>
+		</form>
+		<br>
+		<p>ó</p>
+		<a style="color: #FFFFFF" href="catalogo/registro_usuario/">Registrarse</a>
+	</div>
+	
+</div>
+
+<style>
+	#titulo{
+	color: #fed136;
+    font-family: "Helvetica Neue", Helvetica, Arial, cursive;
+    font-size: 2em;
+    margin-top: 3%;
+	}
+</style>
+	
+{% block app %}
+	
+{% endblock%}
+
+{% endblock %}

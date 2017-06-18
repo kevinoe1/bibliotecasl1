@@ -1,0 +1,240 @@
+{% extends "base2.html" %}
+{% block titlepage %}
+    Bienvenidos a Biblioteca
+{% endblock %}
+{% load static %}
+
+{% block libro %}
+<section id="mostrar">
+		{% for libro in libros %}
+			<article class="libros">
+				<a id="cuadro" href="{% url 'reservacion' libro.cod_libro %}">
+				<img id="portada" src="../media/{{ libro.portada }}" alt="por">
+				<b><p class="texto">{{ libro }}</p> 
+				<i><p class="texto">{{ libro.autor }}</p></i></b>
+				</a>
+			</article>
+		{% endfor %}
+</section>
+
+<h2 class="tit">Literatura</h2>
+<section id="Literatura" class="Mascua">
+		{% for libro in literatura %}
+			<article class="libros">
+				<a id="cuadro" href="{% url 'reservacion' libro.cod_libro %}">
+				<img id="portada" src="../media/{{ libro.portada }}" alt="por">
+				<b><p class="texto">{{ libro }}</p> 
+				<i><p class="texto">{{ libro.autor }}</p></i></b>
+				</a>
+			</article>
+		{% endfor %}
+</section>
+		<a class="col-md-2 col-md-offset-5 btn btn-primary" href="{% url 'ver_mas' 'Literatura' %}">ver mas</a>
+		
+		<br>
+		<br>
+		<br>
+<h2 class="tit">{{m}}</h2>
+<section id="motivacional" class="Mascua">
+		{% for libro in motivacional %}
+			<article class="libros">
+				<a id="cuadro" href="{% url 'reservacion' libro.cod_libro %}">
+				<img id="portada" src="../media/{{ libro.portada }}" alt="por">
+				<b><p class="texto">{{ libro }}</p> 
+				<i><p class="texto">{{ libro.autor }}</p></i></b>
+				</a>
+			</article>
+		{% endfor %}
+</section>
+<a class="col-md-2 col-md-offset-5 btn btn-primary" href="{% url 'ver_mas_motivacional' %}">ver mas</a>
+		<br>
+		<br>
+		<br>
+<h2 class="tit">Colección General</h2>
+<section id="general" class="Mascua">
+		{% for libro in general %}
+			<article class="libros">
+				<a id="cuadro" href="{% url 'reservacion' libro.cod_libro %}">
+				<img id="portada" src="../media/{{ libro.portada }}" alt="por">
+				<b><p class="texto">{{ libro }}</p> 
+				<i><p class="texto">{{ libro.autor }}</p></i></b>
+				</a>
+			</article>
+		{% endfor %}
+</section>
+<a class="col-md-2 col-md-offset-5 btn btn-primary" href="{% url 'ver_mas_general' %}">ver mas</a>
+		<br>
+		<br>
+		<br>
+<h2 class="tit">Colección Referencia</h2>
+<section id="referencia" class="Mascua">
+		{% for libro in referencia %}
+			<article class="libros">
+				<img id="portada" src="../media/{{ libro.portada }}" alt="por">
+				<b><p class="texto">{{ libro }}</p> 
+				<i><p class="texto">{{ libro.autor }}</p></i></b>
+			</article>
+		{% endfor %}
+</section>
+<a class="col-md-2 col-md-offset-5 btn btn-primary" href="{% url 'ver_mas_referencia' %}">ver mas</a>
+		<br>
+		<br>
+		<br>
+<h2 class="tit">Lectura espiritual</h2>
+<section id="espititual" class="Mascua">
+		{% for libro in espiritual %}
+			<article class="libros">
+				<a id="cuadro" href="{% url 'reservacion' libro.cod_libro %}">
+				<img id="portada" src="../media/{{ libro.portada }}" alt="por">
+				<b><p class="texto">{{ libro }}</p> 
+				<i><p class="texto">{{ libro.autor }}</p></i></b>
+				</a>
+			</article>
+		{% endfor %}
+</section>
+<a class="col-md-2 col-md-offset-5 btn btn-primary" href="{% url 'ver_mas_espiritual' %}">ver mas</a>
+		<br>
+		<br>
+		<br>
+ 	
+	<style>
+		section{
+			padding-bottom: 0;
+		}
+		h2{
+			
+			color: #585858;
+
+		}
+
+		#portada{
+			height: 190px;
+			width: 160px;
+		}
+		#cuadro{
+			color: black;
+			margin: auto;
+		}
+		#mostrar{
+			margin-top: -150px;
+			text-align: center;
+		}
+		.tit{
+			text-align: center;
+			margin-top: 8%;
+		}
+		.texto{
+			color: black;
+		}
+		.libros{
+			display: inline-table;
+			border: 3px;
+			border-style: outset;
+			height: 315px;
+			width: 220px;
+			text-align: center;
+			margin: 20px 20px 20px 20px;
+			padding: 15px;
+			background: #FFFFFF;
+		}
+		.Mascua{
+			border: none;
+			padding: 0;
+			background: #F2F2F2;
+			margin: 0 0px 8px 0px;
+		}
+
+		
+		@media screen and (max-width: 760px){
+			#mostrar{
+				margin-top: 5%;
+			}
+
+			#page-top{
+				margin-top: 5%;
+			}
+
+			#logou{
+				position:absolute;
+				padding-left: 2%;
+				margin-top:5%!important;
+				left:2%!important;
+			}
+		}
+
+		@media screen and (max-width: 988px){
+			#mostrar{
+				margin-top: 5%;
+			}
+
+			#logou{
+				position:absolute;
+				padding-left: 2%;
+				margin-top:5%!important;
+				left:2%!important;
+			}
+		}
+
+		@media screen and (max-width: 360px){
+			.container{
+				width: 100%;
+				margin:0!important;
+				padding: 0;
+				display: block !important;
+			}	
+
+			#tituloBi {
+			    font-size: 1.5em !important;
+			    padding: 10% 0%;
+			    margin-left:25%;
+			}
+
+			.row, .p{
+				width: 100%;
+				margin:0!important;
+			}
+
+			#mainNav{
+				width:360px;
+			}
+
+			html{
+				width:100% !important;
+			}
+
+			body{
+				width: 100%;
+			}
+
+			#boton{
+				left: 78% !important;
+				margin-top: 4% !important;
+			}
+
+			#Se{
+				padding: 0 !important;
+				width:100%!important;
+			}
+
+			#logou{
+				position:absolute;
+				padding-left: 2%;
+				margin-top:5%!important;
+				left:2%!important;
+			}
+
+			#page-top{
+				margin-top: 20%;
+			}
+
+			#mostrar{
+				margin-top: 10%;
+			}
+		} 
+
+
+	</style>
+
+		
+{% endblock  %}
+

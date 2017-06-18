@@ -1,0 +1,359 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/agency.css' %}" >
+    <link href="https://fonts.googleapis.com/css?family=Poppins|Raleway" rel="stylesheet">
+{% endblock  %}
+
+
+
+    
+
+{% block var %}
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container row col-md-12">
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+            <img class="row col-md-2" src="{% static 'img/logo.png' %}" id="logou" alt="">
+            <a id="tituloBi" class="navbar-brand page-scroll" href="#page-top">Biblioteca virtual UNICAH</a>
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user %}
+                        <li>
+                            <a class="page-scroll" href="{% url 'index' %}">Inicio</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'reservaciones' %}">Reservaciones</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'estadisticas' %}">Estadísticas</a>
+                        </li>
+                        <div class="btn-group">
+                          <button id="btnGestionar" type="button" class="btn btn-primary dropdown-toggle"
+                                  data-toggle="dropdown">Gestionar<span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a style="color:#1C2A64;" href="/admin/Catalogo/area/">Áreas</a></li>
+                            <li><a style="color:#1C2A64;" href="/admin/Catalogo/autor/">Autores</a></li>
+                            <li><a style="color:#1C2A64;" href="/admin/Catalogo/copialibro/">Copias libros</a></li>
+                            <li><a style="color:#1C2A64;" href="/admin/Catalogo/edicion/">Ediciones</a></li>
+                            <li><a style="color:#1C2A64;" href="/admin/Catalogo/editorial/">Editoriales</a></li>
+                            <li><a style="color:#1C2A64;" href="/admin/Catalogo/idioma/">Idiomas</a></li>
+                            <li><a style="color:#1C2A64;" href="/admin/Catalogo/libro/">Libros</a></li>
+                            <li><a style="color:#1C2A64;" href="/admin/Catalogo/categoria/">Categorias</a></li>
+                            <li><a style="color:#1C2A64;" href="/admin/Catalogo/reservacion/">Reservaciones</a></li>
+                            <li><a style="color:#1C2A64;" href="/admin/Catalogo/perfil/">Usuarios</a></li>
+                          </ul>
+                        </div>
+                       
+                        <li>
+                            <a class="page-scroll" href="{% url 'logout' %}">Cerrar sesión</a>
+                        </li> 
+                     {% else %}
+                        <li class="hidden">
+                        <a href="#page-top"></a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#libros">Libros</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#acerca">Acerca de</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'logout' %}">Cerrar sesión</a>
+                        </li> 
+                        
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+{% endblock %}
+    <!-- Header -->
+{% block head %} 
+    <header id="page-top">
+        <div class="container">
+            <div class="intro-text">
+              {% if user %}
+                <style>
+                  .intro-text{
+                    margin-top: 25%;
+                  }
+                </style>
+              {% else %}
+              {% endif %}
+                <div class="intro-lead-in">Bienvenido a nuestra </div>
+                <div class="intro-heading">Biblioteca San Lorenzo</div>
+                <div class="intro-heading"><h1><strong>2000</strong> libros y contando!</h1></div>  
+                {% if user %}
+                {% else %}                  
+                    <a href="#libros" class="page-scroll btn btn-xl">Libros</a>           
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    
+{% endblock %}
+
+
+
+{% block container %}
+    {% block info %}
+    {% if user %}
+    {% else %}
+       <section id="libros">
+        <form method="get" action="{% url 'busqueda' %}">
+          <div class="form-group">
+            <div id="Se" class="input-grouprow row col-md-7 col-md-offset-2">
+                <input class="welcome-header__search__string" name="q" id="ds" type="text" value="{{ request.GET.q }}" placeholder="Buscar libro...">
+                <span class="icon  icon--search"></span>
+                <button type="submit" id="boton"><img src="{% static 'img/search.png' %}" alt=""></button>
+            </div>
+                <select name="dropdown1" id="lista">
+                    <option value="{{ request.GET.dropdown1 }}">{{ request.GET.dropdown1 }}</option>
+                    {% for nombreare in nombrearea  %}
+                        <option value="{{ nombreare.nombre}}">{{ nombreare.nombre }}</option>
+                    {% endfor %}
+                    <option selected="selected" value="Todas las categorias">Todas las categorias</option>
+                </select>
+ 
+                <section>
+                    {% block libro  %}
+                        
+                    {% endblock  %}
+                </section>
+            </div>
+          </div>
+        </form>
+    </section>
+    <div id="acercaCont">
+    <section id="acerca">
+        <h2 class="h2" id="tb">BIblioteca San Lorenzo</h2>
+        <h4 class="subt">Universidad Católica de Honduras</h4>
+        <h4 class="subt">campus "Dios Espíritu Santo"</h4>
+        <br>
+        <p class="row col-md-8 col-md-offset-2">La biblioteca ofrece sus servicios a todos los estudiantes, docentes y personal administrativo de la universidad en un horario de:</p>
+        <div class="row col-md-8 col-md-offset-2">
+          <article class="col-md-6">
+              <strong><p class="subt">Lunes - Jueves</p></strong>
+              <p class="subt hor">9:00 a.m. - 12:00 p.m.</p>
+              <p class="subt hor">1:00 p.m. - 8:00 p.m.</p>
+          </article>
+          <article class="col-md-6">
+              <strong><p class="subt">Viernes</p></strong>
+              <p class="subt hor">8:00 a.m. - 12:00 p.m.</p>
+              <p class="subt hor">1:00 p.m. - 5:00 p.m.</p>
+          </article>
+        </div>
+        <p class="row col-md-8 col-md-offset-2">Tiene la modalidad de "estantería abierta" es decir, que el usuario pasa directamente a la estanteriaa buscar el libro que le interese.</p>
+        <strong><p class="row col-md-8 col-md-offset-2" style="font-size:2em;">Ofrece los siguientes servicios:</p></strong>
+        <article class="col-md-6 col-md-offset-2">
+              <p class="">Prestamos de libros.</p>
+              <p class="">Sala de estudio grupal, individual y en silencio</p>
+              <p class="">Hemeroteca</p>
+              <p class="">Computadoras con internet</p>
+              <p class="">Consulta de Tesis</p>
+              <p class="">Bibliotecas virtuales</p>
+          </article>
+    </section>
+    </div>
+    {% endif %}
+
+<footer class="site-footer">
+    <div class="gr">
+        <div class="company-info">
+        <div class="footer" style="text-align: center;margin-left:0px"><h3 style="letter-spacing: 0.6px;">UNICAH Social</h3><br> <a href="https://instagram.com/unicah_hn/"><img src="{% static 'img/instagram.png' %}"></a> <a href="https://twitter.com/UNICAH_HN"><img src="{% static 'img/twitter.png' %}"></a> <a href="https://www.youtube.com/channel/UCuF6E9Gy5uygvlkBlo447Ow"><img src="{% static 'img/youtube.png' %}"></a> <a href="https://plus.google.com/u/0/"><img src="{% static 'img/google.png' %}"></a> <a href="https://www.facebook.com/UNICAHONDURAS"><img src="{% static 'img/facebook.png' %}"></a><br><br> <a style="color:#999;" target="_blank" href="http://www.unicah.edu/"><img src="{% static 'img/u.ico' %}" >www.unicah.edu</a></div>
+      <ul class="nav__items">
+      </ul>
+        <h3 class="site-footer__logo  site-footer__logo--beta"><a style="text-decoration:none; color:#FFFFFF;" href="/">Universidad Católica de Honduras</a></h3>
+        <p class="copyright">Derechos reservados © 2017</p>
+    </div>
+    </div>
+</footer>
+    {% endblock %}
+
+   
+
+    <!-- jQuery -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" integrity="sha384-mE6eXfrb8jxl0rzJDBRanYqgBxtJ6Unn4/1F7q4xRRyIw7Vdg9jP4ycT7x1iVsgb" crossorigin="anonymous"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="{% static 'js/jqBootstrapValidation.js' %}"></script>
+    <script src="{% static 'js/contact_me.js' %}"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="{% static 'js/agency.min.js' %}"></script>
+ <style>
+ #ds{
+    width: 100%;
+    border-radius: 15px;
+    font-size: 3em;
+    font-family: "Raleway";
+    font-style: italic;
+    background-color: #FFF;
+    box-shadow: #C9C9C9 0 0 0 1px;
+    float: left;
+    line-height: 30px;
+    padding: 16px 200px 16px 42px;
+    width: 100%;
+    border:6px solid #D8D8D8;
+}
+
+
+
+
+
+.welcome-header__search__string {
+    box-shadow: rgba(255,255,255,.3) 0 0 0 10px!important;
+    font-size: 36px!important;
+    line-height: 44px!important;
+    padding: 16px 60px 16px 42px!important;
+}
+
+.welcome-header__search .icon{
+    opacity: .5;
+    position: absolute;
+    right: 30px;
+    top: 26px;
+}
+
+[class*=" icon-"], [class^=icon-] {
+    font-family: icomoon;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.welcome-header {
+    padding: 150px 0;
+    text-align: center;
+}
+
+#boton{
+  position: absolute;
+  left: 87%;
+  margin-top: 2%;
+  background-color: transparent;
+  border:none;
+}
+
+input:focus{
+  outline:0px;
+}
+
+  .hor{
+    font-size: 1.5em;
+  }
+
+ .subt{
+  text-align: center;
+ }
+
+ #tb{
+    text-align: center;
+    font-size: 3em;
+ }
+
+#der{
+  text-align: center;
+}
+
+#un{
+  text-align: center;
+}
+
+  #footer{
+    height: 200px;
+    padding: 50px 0 20px 0;
+    background-color: #35404f;
+    color: #878c94;
+    margin-top: 20%;
+  }
+
+  #lista
+  {
+  border: 1px solid #DBE1EB;
+  font-size: 1.5em;
+  font-family: "Raleway";
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  color: #2E3133;
+  font-weight: 700;
+  border:none;
+  background-color: #143458;
+  color:#FFFFFF;
+  margin-left: 3%;
+  margin-top: 1%;
+  }
+  
+  #lista:hover
+  {
+  border-color: #FBFFAD;
+  }
+  
+  #lista option
+  {
+  border: 1px solid #DBE1EB;
+  border-radius: 4px;
+  font-size: 12px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  font-weight: 700;
+  }
+  
+  #lista option:hover
+  {
+  background: #FC4F06;
+  background: linear-gradient(left, #FC4F06, #D85F2B);
+  background: -moz-linear-gradient(left, #FC4F06, #D85F2B);
+  background: -webkit-linear-gradient(left, #FC4F06, #D85F2B);
+  background: -o-linear-gradient(left, #FC4F06, #D85F2B);
+  font-style: italic;
+  color: #FFFFFF;
+  }
+
+  #acercaCont{
+    background-image: url("{% static 'img/es.jpg' %}");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display:inline-block;
+  }
+
+  .h2{
+    color: #FFFFFF;
+  }
+
+ 
+ </style>    
+{% endblock %}
+

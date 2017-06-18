@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block scripts %}{% endblock %}
+    <title>{% block titlepage %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%  static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'Catalogo/css/jquery.notice.css' %}">
+    <link rel="stylesheet" href="{% static 'css/agency.css' %}"> 
+    <link href="https://fonts.googleapis.com/css?family=Poppins|Raleway" rel="stylesheet">
+	<link rel="shortcut icon" href="{% static 'img/u.ico' %}">
+{% block css %}
+    
+{% endblock  %}
+</head>
+<body>
+{% block var %}
+{% endblock %}
+{% block head %}
+{% endblock %}
+{% block container %}
+    
+{% endblock %}
+
+<script src="{%  static 'js/jquery.min.js' %}"></script>
+
+<script src="{%  static 'bootstrap/js/css/bootstrap.js' %}"></script>
+<script src="{% static 'Catalogo/js/jquery.min.js' %}"></script>
+
+{% block app %}
+<script src="{% static 'Catalogo/js/app.js' %}"></script>
+{% endblock%}
+<script src="{% static 'Catalogo/js/jquery.notice.js' %}"></script>
+<script src="{% static 'Catalogo/js/jquery.mask.min.js' %}"></script>
+
+{% block extrajs %}{% endblock %}
+    
+</body>
+</html>

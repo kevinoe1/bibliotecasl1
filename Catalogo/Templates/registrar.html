@@ -1,0 +1,358 @@
+{% extends "base2.html" %}
+
+{% load static %}
+{% block titlepage %}
+    Registrar
+{% endblock %}
+{% block css %}
+
+
+<style>
+	body{
+		background-image: url("{% static 'img/chi.jpg' %}");
+	    background-repeat: no-repeat;
+	    background-attachment: fixed;
+	    background-size: cover;
+	}
+	input[type=text] {
+    	box-shadow: #39828F 0 0 0 1px;
+    	font-family: freight-sans-pro,sans-serif;
+	    font-style: italic;
+	    font-weight: 400;
+	    background-color: #FFF;
+	    border: 2px solid transparent;
+	    border-radius: 6px;
+	    box-shadow: #C9C9C9 0 0 0 1px;
+	    font-size: 18px;
+	    float: left;
+	    line-height: 30px;
+	    padding: 9px 24px 9px 18px;
+	    color:#011847;
+	}
+
+	input[type=password] {
+    	box-shadow: #39828F 0 0 0 1px;
+    	font-family: freight-sans-pro,sans-serif;
+	    font-style: italic;
+	    font-weight: 400;
+	    background-color: #FFF;
+	    border: 2px solid transparent;
+	    border-radius: 6px;
+	    box-shadow: #C9C9C9 0 0 0 1px;
+	    font-size: 18px;
+	    float: left;
+	    line-height: 30px;
+	    padding: 9px 24px 9px 18px;
+	    color:#011847;
+	}
+
+	input[type=number], input[type=email], select {
+    	box-shadow: #39828F 0 0 0 1px;
+    	font-family: freight-sans-pro,sans-serif;
+	    font-style: italic;
+	    font-weight: 400;
+	    background-color: #FFF;
+	    border: 2px solid transparent;
+	    border-radius: 6px;
+	    box-shadow: #C9C9C9 0 0 0 1px;
+	    font-size: 18px;
+	    float: left;
+	    line-height: 30px;
+	    padding: 9px 24px 9px 18px;
+	    color:#011847;
+	}
+
+	 label{
+    	font-family: 'Raleway', Helvetica, Arial, sans-serif;
+    	font-style: normal;
+    	font-size: 12pt;
+	}
+
+	li {
+      padding-bottom: 0px;
+  	}
+
+  	select{
+
+  	}
+
+
+	.form__structure{
+    	list-style: none;
+    	margin: 0;
+    	padding: 0;
+	}
+
+	#id_username{
+		width: 100%;
+	}
+
+	#btnRegistrar{
+		font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    	font-style: normal;
+    	font-size: 14pt;
+	}
+
+
+@media screen and  (max-width: 1300px) {
+    .section {
+    	padding: 48px 0;
+    	height: 820px;
+	}
+	html {
+    	font-size: 16px;
+    	line-height: 24px;
+	}
+
+	#frmRegistrar{
+		width: 100%;
+	}
+	
+	#im{
+		display:none;
+	}
+
+	#titulo{
+		font-size: 1em;
+	}
+
+	#mainNav{
+		display:inline-block;
+	}
+}
+
+
+
+.audio-player:after, .cf:after, .checkout__summary__container:after, .clients__list:after, .error-container:after, .form__item--side-by-side:after, .form__item--trio:after, .form__item:after, .form__structure:after, .gr:after, .modal-actions:after, .nav:after, .nav__menu:after, .payment-plans:after, .plan-management:after, .plan-management__features:after, .plan-management__header:after, .producer-page__payout-preview:after, .producer-testimonials__nav:after, .product-placeholder__link:after, .product-placeholders:after, .product-spec:after, .products:after, .search:after, .secondary-content:after, .section__aside:after, .section__column:after, .section__v-align:after, .section__v-align__body:after, .submission-nav__items:after, .submission__body:after, .submission__header:after, .submissions__header:after, .tab__nav:after, .toolbar:after, .video-player:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+div{
+  display: block;
+}
+.section__column {
+    width: 47.93617%;
+        float: left;
+    margin-right: 2.12766%;
+    display: block;
+}
+
+.section {
+    background-color: #6EC7D7;
+    color: #FFF;
+    padding: 72px 0 72px 0;
+    margin-bottom: 500px;
+}
+
+.gr {
+    margin: 0 auto;
+    padding: 0 30px;
+    position: relative;
+    max-width: 1470px;
+}
+
+#titulo{
+	color: #fed136;
+ 	font-family: "Helvetica Neue", Helvetica, Arial, cursive;
+ 	text-decoration: none;
+ 	font-size: 1.5em;
+}
+
+#logou{
+	max-width: 100px;
+	padding-top: 0;
+}
+
+@media screen and  (max-width: 500px) {
+		#titulo{
+			font-size: 1em;
+		}
+	}
+
+#head{
+	text-align: center;
+	padding: 130px 0 80px 0;
+	color:#575656;
+	background-color: #F7F7F7;
+}	
+
+#sel1{
+	box-shadow: #39828F 0 0 0 1px;
+    font-family: freight-sans-pro,sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    background-color: #FFF;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    box-shadow: #C9C9C9 0 0 0 1px;
+    font-size: 18px;
+    float: left;
+    line-height: 30px;
+    padding: 9px 24px 9px 18px;
+    width: 80%;
+    height:50px;
+    color: #011847;
+}
+
+.form_item{
+	width: 80%;
+	margin-right: 60%;
+}
+
+#btnRegistrar{
+	margin-top: 5%;
+	font-size: 1em;
+	padding: 2% 5%;
+}
+
+
+ span{
+	display: none;
+}
+
+ul{
+	display:none;
+}
+
+ul.errorlist{
+	display:inline;
+	color:#B30000;
+}
+
+@media screen and  (max-width: 360px) {
+    .section {
+    	padding: 48px 0;
+    	height: 820px;
+	}
+
+	#frmRegistrar{
+		width: 100%;
+	}
+	
+	#im{
+		display:none;
+	}
+
+	#titulo{
+		font-size: 1em;
+	}
+
+	#mainNav{
+		display:inline-block;
+	}
+
+	#tit{
+	font-size:2em !important;
+	}
+
+	#head{
+		width:100%;
+	}
+
+	body{
+		width:100%;
+	}
+
+	#titulo{
+		font-size: 1.5em !important;
+		padding: 8% 0;
+	}
+
+	#logou{
+		margin-top:3%;
+	}
+
+	.section__column{
+		width: 100%;
+	}
+
+	#btnRegistrar{
+		width: 80%;
+		font-size: 1.2em;
+		height: 60px;
+		margin: 8% 15%;
+	}
+
+
+}
+
+
+}
+
+#tit{
+	font-size:3em;
+}
+
+</style> 
+	
+{% endblock %}
+
+{% block var %}
+	 <nav id="mainNav" style="background-color: #143458; height:80px;" class="navbar navbar-default navbar-custom navbar-fixed-top affix">
+        <div class="container row col-md-12">
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+            <img class="navbar-brand row col-md-2" src="{% static 'img/logo.png' %}" id="logou" alt="">
+            <a id="titulo" class="navbar-brand page-scroll" href="{% url 'index' %}">Biblioteca virtual UNICAH</a>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="{% url 'index' %}#libros">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+{% endblock  %}
+
+{% block head %}
+	<section id="head">
+		<h2 id="tit">Crea una cuenta gratis!</h2>
+		<h4>Al crear una cuenta prodrás acceder a todo el contenido de la biblioteca.</h4>
+	</section>
+{% endblock head %}
+
+{% block container %}
+	
+<section class="section">
+	<div class="gr">
+		<div class="section__column">
+			<img id="im" style="max-width: 450px" src="{% static 'img/sing.png' %}" alt="">
+		</div>
+		<div class="section__column row col-md-2">
+			<form action="{% url 'registro_usuario' %}" method="post" id="frmRegistro" >
+			{{ form.as_p }}
+			{% csrf_token %}
+			<br>
+			<button type="submit" name="registrar" class="btn btn-primary" id="btnRegistrar">Registrar</button>
+		</form>
+		</div>
+	</div>
+</section> 
+ <footer class="site-footer">
+    <div class="gr">
+        <div class="company-info">
+        <div class="footer" style="text-align: center;margin-left:0px"><h3 style="letter-spacing: 0.6px;">UNICAH Social</h3><br> <a href="https://instagram.com/unicah_hn/"><img src="{% static 'img/instagram.png' %}"></a> <a href="https://twitter.com/UNICAH_HN"><img src="{% static 'img/twitter.png' %}"></a> <a href="https://www.youtube.com/channel/UCuF6E9Gy5uygvlkBlo447Ow"><img src="{% static 'img/youtube.png' %}"></a> <a href="https://plus.google.com/u/0/"><img src="{% static 'img/google.png' %}"></a> <a href="https://www.facebook.com/UNICAHONDURAS"><img src="{% static 'img/facebook.png' %}"></a><br><br> <a style="color:#999;" target="_blank" href="http://www.unicah.edu/"><img src="{% static 'img/u.ico' %}" >www.unicah.edu</a></div>
+      <ul class="nav__items">
+      </ul>
+        <h3 class="site-footer__logo  site-footer__logo--beta"><a style="text-decoration:none; color:#FFFFFF;" href="/">Universidad Católica de Honduras</a></h3>
+        <p class="copyright">Derechos reservados © 2017</p>
+    </div>
+    </div>
+</footer>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static 'js/registro.js' %}"></script>
+
+{% endblock %}
+
+
